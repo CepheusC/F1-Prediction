@@ -16,6 +16,7 @@ import eventsRoutes from './routes/events.js'
 import adminRoutes from './routes/admin.js'
 import { requireUser } from './middleware/requireUser.js'
 import { requireAdmin } from './middleware/requireAdmin.js'
+import { getEnv } from './lib/env.js'
 
 // load env
 dotenv.config()
@@ -41,9 +42,16 @@ app.use('/api/admin', requireUser, requireAdmin, adminRoutes)
 app.use(
   '/api/health',
   (req: Request, res: Response): void => {
+    let configured = true
+    try {
+      getEnv()
+    } catch {
+      configured = false
+    }
     res.status(200).json({
       success: true,
       message: 'ok',
+      configured,
     })
   },
 )

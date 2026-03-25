@@ -30,7 +30,7 @@ export async function apiFetch<T>(
   } catch (e) {
     const msg = e instanceof Error ? e.message : 'Network error'
     const isAbort = e instanceof DOMException && e.name === 'AbortError'
-    throw new Error(isAbort ? `ÇëÇó³¬Ê±£¨>${timeoutMs / 1000}s£©` : msg)
+    throw new Error(isAbort ? `è¯·æ±‚è¶…æ—¶ï¼ˆ>${timeoutMs / 1000}sï¼‰` : msg)
   } finally {
     clearTimeout(timeout)
   }
